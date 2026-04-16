@@ -1,0 +1,498 @@
+/*-----------------------------------*\
+  #MODERN NOORA GROW TEXT COMPONENT
+\*-----------------------------------*/
+
+/**
+ * Modern youth-oriented text styling component
+ * Provides multiple variants with contemporary effects
+ */
+
+/* CSS Custom Properties for theming */
+:root {
+  /* Brand color integration with existing design system */
+  --noora-salmon-pink: #FFB6C1;
+  --noora-brand-primary: #3B82F6;
+  --noora-brand-secondary: #10B981;
+  --noora-brand-accent: #8B5CF6;
+  --noora-brand-light: #F8FAFC;
+  --noora-brand-dark: #1E293B;
+  
+  /* Gradient definitions */
+  --noora-gradient-primary: linear-gradient(135deg, var(--noora-salmon-pink), var(--noora-brand-accent));
+  --noora-gradient-secondary: linear-gradient(45deg, var(--noora-brand-primary), var(--noora-brand-secondary));
+  --noora-gradient-accent: linear-gradient(90deg, var(--noora-brand-accent), var(--noora-salmon-pink));
+  --noora-gradient-rainbow: linear-gradient(45deg, var(--noora-salmon-pink), var(--noora-brand-accent), var(--noora-brand-primary), var(--noora-brand-secondary));
+  
+  /* Neon glow effects */
+  --noora-neon-glow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+  --noora-neon-glow-subtle: 0 0 5px currentColor, 0 0 10px currentColor;
+  --noora-neon-glow-intense: 0 0 15px currentColor, 0 0 30px currentColor, 0 0 45px currentColor;
+  
+  /* Animation timing */
+  --noora-animation-duration: 3s;
+  --noora-animation-timing: ease-in-out;
+  --noora-hover-duration: 0.3s;
+  --noora-pulse-duration: 2s;
+  
+  /* Typography system */
+  --noora-font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --noora-font-weight-normal: 500;
+  --noora-font-weight-medium: 600;
+  --noora-font-weight-bold: 700;
+  --noora-font-weight-black: 900;
+  --noora-letter-spacing: -0.025em;
+  --noora-letter-spacing-wide: 0.025em;
+  
+  /* Size system with fluid scaling */
+  --noora-size-sm: clamp(1rem, 2vw + 0.5rem, 1.125rem);
+  --noora-size-md: clamp(1.25rem, 3vw + 0.75rem, 1.5rem);
+  --noora-size-lg: clamp(1.75rem, 4vw + 1rem, 2.25rem);
+  --noora-size-xl: clamp(2.25rem, 5vw + 1.5rem, 3rem);
+  --noora-size-hero: clamp(3rem, 8vw + 2rem, 4.5rem);
+  
+  /* Shadow system */
+  --noora-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --noora-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --noora-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --noora-shadow-text: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*-----------------------------------*\
+  #BASE COMPONENT STYLES
+\*-----------------------------------*/
+
+.modern-noora-text {
+  /* Typography foundation */
+  font-family: var(--noora-font-family);
+  font-weight: var(--noora-font-weight-bold);
+  letter-spacing: var(--noora-letter-spacing);
+  line-height: 1.1;
+  
+  /* Display properties */
+  display: inline-block;
+  position: relative;
+  
+  /* Smooth transitions */
+  transition: all var(--noora-hover-duration) ease;
+  
+  /* Ensure crisp text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  
+  /* Prevent text selection for decorative use */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+/*-----------------------------------*\
+  #SIZE VARIANTS
+\*-----------------------------------*/
+
+.modern-noora-text--sm {
+  font-size: var(--noora-size-sm);
+  line-height: 1.2;
+  font-weight: var(--noora-font-weight-medium);
+}
+
+.modern-noora-text--md {
+  font-size: var(--noora-size-md);
+  line-height: 1.2;
+  font-weight: var(--noora-font-weight-bold);
+}
+
+.modern-noora-text--lg {
+  font-size: var(--noora-size-lg);
+  line-height: 1.1;
+  font-weight: var(--noora-font-weight-bold);
+}
+
+.modern-noora-text--xl {
+  font-size: var(--noora-size-xl);
+  line-height: 1;
+  font-weight: var(--noora-font-weight-bold);
+}
+
+.modern-noora-text--hero {
+  font-size: var(--noora-size-hero);
+  line-height: 0.9;
+  font-weight: var(--noora-font-weight-black);
+  letter-spacing: var(--noora-letter-spacing-wide);
+}
+
+/*-----------------------------------*\
+  #INTERACTIVE STATES
+\*-----------------------------------*/
+
+.modern-noora-text--interactive {
+  cursor: pointer;
+}
+
+.modern-noora-text--interactive:hover {
+  transform: translateY(-1px);
+}
+
+.modern-noora-text--interactive:active {
+  transform: translateY(0);
+}
+
+/*-----------------------------------*\
+  #ACCESSIBILITY & PERFORMANCE
+\*-----------------------------------*/
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .modern-noora-text,
+  .modern-noora-text::before,
+  .modern-noora-text::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .modern-noora-text--interactive:hover {
+    transform: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .modern-noora-text {
+    text-shadow: none;
+    filter: none;
+  }
+}
+
+/*-----------------------------------*\
+  #RESPONSIVE DESIGN
+\*-----------------------------------*/
+
+/* Mobile optimizations */
+@media (max-width: 767px) {
+  .modern-noora-text {
+    /* Slightly reduce letter spacing on mobile */
+    letter-spacing: -0.01em;
+  }
+  
+  .modern-noora-text--hero {
+    /* Ensure hero text doesn't overflow on small screens */
+    font-size: clamp(2rem, 12vw, 3rem);
+  }
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .modern-noora-text--interactive:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .modern-noora-text {
+    letter-spacing: var(--noora-letter-spacing);
+  }
+}
+
+/*-----------------------------------*\
+  #COLOR SCHEME VARIANTS
+\*-----------------------------------*/
+
+.modern-noora-text--primary {
+  color: var(--noora-brand-primary);
+}
+
+.modern-noora-text--secondary {
+  color: var(--noora-brand-secondary);
+}
+
+.modern-noora-text--accent {
+  color: var(--noora-brand-accent);
+}
+
+/*-----------------------------------*\
+  #CLASSIC VARIANT (DEFAULT FALLBACK)
+\*-----------------------------------*/
+
+.modern-noora-text--classic {
+  color: var(--noora-brand-dark);
+  text-shadow: var(--noora-shadow-text);
+  font-weight: var(--noora-font-weight-bold);
+}
+
+.modern-noora-text--classic.modern-noora-text--interactive:hover {
+  color: var(--noora-salmon-pink);
+  text-shadow: 0 2px 8px rgba(255, 182, 193, 0.3);
+}
+
+/* Classic variant with different color schemes */
+.modern-noora-text--classic.modern-noora-text--primary {
+  color: var(--noora-brand-primary);
+}
+
+.modern-noora-text--classic.modern-noora-text--primary.modern-noora-text--interactive:hover {
+  color: var(--noora-brand-accent);
+  text-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.modern-noora-text--classic.modern-noora-text--secondary {
+  color: var(--noora-brand-secondary);
+}
+
+.modern-noora-text--classic.modern-noora-text--secondary.modern-noora-text--interactive:hover {
+  color: var(--noora-brand-primary);
+  text-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.modern-noora-text--classic.modern-noora-text--accent {
+  color: var(--noora-brand-accent);
+}
+
+.modern-noora-text--classic.modern-noora-text--accent.modern-noora-text--interactive:hover {
+  color: var(--noora-salmon-pink);
+  text-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
+}
+
+/*-----------------------------------*\
+  #PLACEHOLDER VARIANT STYLES
+\*-----------------------------------*/
+
+/*-----------------------------------*\
+  #GRADIENT VARIANT
+\*-----------------------------------*/
+
+.modern-noora-text--gradient {
+  background: var(--noora-gradient-primary);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  position: relative;
+}
+
+/* Gradient color scheme variants */
+.modern-noora-text--gradient.modern-noora-text--primary {
+  background: var(--noora-gradient-primary);
+}
+
+.modern-noora-text--gradient.modern-noora-text--secondary {
+  background: var(--noora-gradient-secondary);
+}
+
+.modern-noora-text--gradient.modern-noora-text--accent {
+  background: var(--noora-gradient-accent);
+}
+
+/* Animated gradient background */
+.modern-noora-text--gradient.modern-noora-text--animated {
+  background: var(--noora-gradient-rainbow);
+  background-size: 400% 400%;
+  animation: gradientShift var(--noora-animation-duration) ease-in-out infinite;
+}
+
+/* Hover effects for gradient */
+.modern-noora-text--gradient.modern-noora-text--interactive:hover {
+  background-size: 150% 150%;
+  filter: brightness(1.1);
+}
+
+/* Fallback for browsers that don't support background-clip: text */
+@supports not (-webkit-background-clip: text) {
+  .modern-noora-text--gradient {
+    background: none;
+    color: var(--noora-salmon-pink);
+    -webkit-text-fill-color: initial;
+  }
+  
+  .modern-noora-text--gradient.modern-noora-text--primary {
+    color: var(--noora-brand-primary);
+  }
+  
+  .modern-noora-text--gradient.modern-noora-text--secondary {
+    color: var(--noora-brand-secondary);
+  }
+  
+  .modern-noora-text--gradient.modern-noora-text--accent {
+    color: var(--noora-brand-accent);
+  }
+}
+
+/*-----------------------------------*\
+  #NEON VARIANT
+\*-----------------------------------*/
+
+.modern-noora-text--neon {
+  color: var(--noora-brand-accent);
+  text-shadow: var(--noora-neon-glow);
+  filter: brightness(1.2);
+  position: relative;
+}
+
+/* Neon color scheme variants */
+.modern-noora-text--neon.modern-noora-text--primary {
+  color: var(--noora-brand-primary);
+  text-shadow: 
+    0 0 5px var(--noora-brand-primary),
+    0 0 10px var(--noora-brand-primary),
+    0 0 15px var(--noora-brand-primary),
+    0 0 20px var(--noora-brand-primary);
+}
+
+.modern-noora-text--neon.modern-noora-text--secondary {
+  color: var(--noora-brand-secondary);
+  text-shadow: 
+    0 0 5px var(--noora-brand-secondary),
+    0 0 10px var(--noora-brand-secondary),
+    0 0 15px var(--noora-brand-secondary),
+    0 0 20px var(--noora-brand-secondary);
+}
+
+.modern-noora-text--neon.modern-noora-text--accent {
+  color: var(--noora-salmon-pink);
+  text-shadow: 
+    0 0 5px var(--noora-salmon-pink),
+    0 0 10px var(--noora-salmon-pink),
+    0 0 15px var(--noora-salmon-pink),
+    0 0 20px var(--noora-salmon-pink);
+}
+
+/* Animated neon pulsing effect */
+.modern-noora-text--neon.modern-noora-text--animated {
+  animation: neonPulse var(--noora-pulse-duration) ease-in-out infinite alternate;
+}
+
+/* Hover effects for neon */
+.modern-noora-text--neon.modern-noora-text--interactive:hover {
+  text-shadow: var(--noora-neon-glow-intense);
+  filter: brightness(1.4);
+}
+
+/* Neon flicker effect on hover */
+.modern-noora-text--neon.modern-noora-text--interactive:hover {
+  animation: neonFlicker 0.1s ease-in-out 3;
+}
+
+.modern-noora-text--animated {
+  /* Enhanced animated variant with floating effect */
+  animation: floatText 4s ease-in-out infinite;
+}
+
+/*-----------------------------------*\
+  #UTILITY CLASSES
+\*-----------------------------------*/
+
+/* Text alignment utilities */
+.modern-noora-text--center {
+  text-align: center;
+}
+
+.modern-noora-text--left {
+  text-align: left;
+}
+
+.modern-noora-text--right {
+  text-align: right;
+}
+
+/* Display utilities */
+.modern-noora-text--block {
+  display: block;
+  width: 100%;
+}
+
+.modern-noora-text--inline {
+  display: inline;
+}
+
+/* Performance optimization for animated variants */
+.modern-noora-text--animated {
+  will-change: transform, filter, background-position;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/*-----------------------------------*\
+  #PRINT STYLES
+\*-----------------------------------*/
+
+@media print {
+  .modern-noora-text {
+    color: #000 !important;
+    text-shadow: none !important;
+    filter: none !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+  }
+}/*-
+----------------------------------*\
+  #KEYFRAME ANIMATIONS
+\*-----------------------------------*/
+
+/* Gradient shifting animation */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Neon pulsing animation */
+@keyframes neonPulse {
+  0% {
+    filter: brightness(1);
+    text-shadow: var(--noora-neon-glow);
+  }
+  100% {
+    filter: brightness(1.3);
+    text-shadow: var(--noora-neon-glow-intense);
+  }
+}
+
+/* Neon flicker effect */
+@keyframes neonFlicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* Floating text animation */
+@keyframes floatText {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+  75% {
+    transform: translateY(-3px) scale(1.02);
+  }
+}
+
+/* Subtle breathing animation */
+@keyframes breathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* Color wave animation */
+@keyframes colorWave {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}

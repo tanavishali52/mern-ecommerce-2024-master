@@ -1,0 +1,219 @@
+/* Responsive Admin Styles */
+
+/* Touch-friendly interactions */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.touch-target-large {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Mobile-first form styles */
+.mobile-form input,
+.mobile-form select,
+.mobile-form textarea {
+  font-size: 16px; /* Prevents zoom on iOS */
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+@media (min-width: 640px) {
+  .mobile-form input,
+  .mobile-form select,
+  .mobile-form textarea {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}
+
+/* Mobile table alternatives */
+.mobile-card {
+  @apply block sm:hidden p-4 border rounded-lg space-y-2 mb-4;
+}
+
+.desktop-table {
+  @apply hidden sm:table;
+}
+
+/* Mobile navigation */
+.mobile-nav-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden;
+}
+
+.mobile-nav-sidebar {
+  @apply fixed left-0 top-0 h-full w-64 bg-background border-r z-50 transform transition-transform duration-300 ease-in-out lg:hidden;
+}
+
+.mobile-nav-sidebar.open {
+  @apply translate-x-0;
+}
+
+.mobile-nav-sidebar.closed {
+  @apply -translate-x-full;
+}
+
+/* Responsive grid utilities */
+.admin-grid-responsive {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.stats-grid-responsive {
+  @apply grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4;
+}
+
+.orders-grid-responsive {
+  @apply grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-3;
+}
+
+/* Mobile-optimized buttons */
+.btn-mobile {
+  @apply min-h-[44px] px-4 py-3 text-base touch-manipulation;
+}
+
+@media (min-width: 640px) {
+  .btn-mobile {
+    @apply min-h-[36px] px-3 py-2 text-sm;
+  }
+}
+
+/* Mobile-friendly modals and sheets */
+.mobile-sheet {
+  @apply w-full sm:w-96 sm:max-w-sm;
+}
+
+.mobile-modal {
+  @apply w-full max-w-sm mx-4 sm:max-w-md sm:mx-auto;
+}
+
+/* Responsive text sizes */
+.text-responsive-xs {
+  @apply text-sm sm:text-xs;
+}
+
+.text-responsive-sm {
+  @apply text-base sm:text-sm;
+}
+
+.text-responsive-base {
+  @apply text-lg sm:text-base;
+}
+
+.text-responsive-lg {
+  @apply text-xl sm:text-lg;
+}
+
+.text-responsive-xl {
+  @apply text-2xl sm:text-xl;
+}
+
+/* Mobile-specific spacing */
+.spacing-mobile {
+  @apply p-4 sm:p-6 lg:p-8;
+}
+
+.gap-mobile {
+  @apply gap-4 sm:gap-6 lg:gap-8;
+}
+
+/* Hide/show utilities for responsive design */
+.hide-mobile {
+  @apply hidden sm:block;
+}
+
+.show-mobile {
+  @apply block sm:hidden;
+}
+
+.hide-tablet {
+  @apply hidden lg:block;
+}
+
+.show-tablet {
+  @apply block lg:hidden;
+}
+
+/* Mobile-optimized scrolling */
+.mobile-scroll {
+  @apply overflow-x-auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Touch-friendly hover states */
+@media (hover: hover) {
+  .hover-desktop:hover {
+    @apply bg-accent text-accent-foreground;
+  }
+}
+
+/* Mobile-first animations */
+.mobile-transition {
+  @apply transition-all duration-200 ease-in-out;
+}
+
+/* Responsive image containers */
+.image-responsive {
+  @apply w-full h-48 sm:h-56 lg:h-64 object-cover rounded-lg;
+}
+
+/* Mobile-friendly dropdowns */
+.dropdown-mobile {
+  @apply w-full sm:w-auto;
+}
+
+/* Safe area handling for mobile devices */
+.safe-area-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Mobile keyboard handling */
+.keyboard-adjust {
+  @apply pb-0;
+}
+
+@media screen and (max-height: 600px) {
+  .keyboard-adjust {
+    @apply pb-20;
+  }
+}
+
+/* Responsive admin layout */
+.admin-layout-mobile {
+  @apply flex flex-col min-h-screen;
+}
+
+.admin-content-mobile {
+  @apply flex-1 overflow-auto;
+}
+
+/* Mobile-optimized loading states */
+.loading-mobile {
+  @apply min-h-[200px] flex items-center justify-center;
+}
+
+/* Responsive error states */
+.error-mobile {
+  @apply p-4 text-center space-y-2;
+}
+
+/* Mobile-friendly pagination */
+.pagination-mobile {
+  @apply flex flex-col sm:flex-row items-center justify-between gap-4;
+}
+
+/* Touch-friendly checkboxes and radio buttons */
+.checkbox-mobile,
+.radio-mobile {
+  @apply min-w-[20px] min-h-[20px];
+}
+
+/* Mobile-optimized tooltips */
+.tooltip-mobile {
+  @apply hidden sm:block;
+}
