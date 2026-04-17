@@ -26,8 +26,8 @@ const createOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5173/shop/paypal-return",
-        cancel_url: "http://localhost:5173/shop/paypal-cancel",
+        return_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/shop/paypal-return`,
+        cancel_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/shop/paypal-cancel`,
       },
       transactions: [
         {
@@ -412,8 +412,8 @@ const createUnifiedOrder = async (req, res) => {
         payment_method: "paypal",
       },
       redirect_urls: {
-        return_url: "http://localhost:5175/shop/paypal-return",
-        cancel_url: "http://localhost:5175/shop/paypal-cancel",
+        return_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/shop/paypal-return`,
+        cancel_url: `${process.env.CLIENT_URL || "http://localhost:5173"}/shop/paypal-cancel`,
       },
       transactions: [
         {

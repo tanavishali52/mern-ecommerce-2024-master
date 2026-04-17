@@ -86,6 +86,7 @@ async function connectToMongoDB({ maxRetries = 5, retryDelayMs = 5000 } = {}) {
 app.use(
   cors({
     origin: [
+      process.env.CLIENT_URL,
       "http://localhost:5173", 
       "http://localhost:5174", 
       "http://localhost:5175", 
@@ -94,7 +95,7 @@ app.use(
       "http://127.0.0.1:5174",
       "http://127.0.0.1:5175",
       "http://127.0.0.1:5176"
-    ],
+    ].filter(Boolean),
     methods: ["GET", "POST", "DELETE", "PUT"],
     allowedHeaders: [
       "Content-Type",

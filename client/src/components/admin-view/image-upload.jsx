@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { Button } from "../ui/button";
 import { UploadCloudIcon, XIcon, FileIcon } from "lucide-react";
 import axios from "axios";
+import { API_BASE_URL } from "../../config/api";
 import { Skeleton } from "../ui/skeleton";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -32,7 +33,7 @@ function ProductImageUpload({
 
     try {
       const response = await axios.post(
-        "http://localhost:5001/api/admin/products/upload-image",
+        `${API_BASE_URL}/api/admin/products/upload-image`,
         formData,
         {
           headers: {
