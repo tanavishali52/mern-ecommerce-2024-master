@@ -3,11 +3,34 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const dotenv = require("dotenv");
+const dns = require("dns");
 const { createServer } = require("http");
 const { WebSocketServer } = require("ws");
 
 // Load environment variables
 dotenv.config();
+
+// Ensure Node can resolve DNS in environments where the configured DNS server is localhost
+// (common when a local DNS proxy is configured but not running).
+const configuredDnsServers = dns.getServers();
+if (process.env.DNS_SERVERS) {
+  const servers = process.env.DNS_SERVERS.split(",").map((s) => s.trim()).filter(Boolean);
+  if (servers.length) {
+    dns.setServers(servers);
+    console.log(`[DNS] Using servers from DNS_SERVERS: ${servers.join(", ")}`);
+  }
+} else if (
+  configuredDnsServers.length === 1 &&
+  (configuredDnsServers[0] === "127.0.0.1" || configuredDnsServers[0] === "::1")
+) {
+  const fallbackServers = ["1.1.1.1", "8.8.8.8"];
+  dns.setServers(fallbackServers);
+  console.warn(
+    `[DNS] Detected localhost DNS (${configuredDnsServers[0]}). Falling back to ${fallbackServers.join(
+      ", "
+    )}. Set DNS_SERVERS to override.`
+  );
+}
 
 // Import routes
 const authRouter = require("./routes/auth/auth-routes");
@@ -30,22 +53,31 @@ const app = express();
 const PORT = process.env.PORT || 5001;
 
 // MongoDB connection with retry logic
-async function connectToMongoDB(retryCount = 0) {
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
-    });
-    console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("MongoDB connection error:", error.message);
-    
-    if (retryCount < 5) {
-      console.log(`Retrying connection in 5 seconds... (Attempt ${retryCount + 1}/5)`);
-      setTimeout(() => connectToMongoDB(retryCount + 1), 5000);
-    } else {
-      console.error("Failed to connect to MongoDB after maximum retry attempts");
-      process.exit(1);
+async function connectToMongoDB({ maxRetries = 5, retryDelayMs = 5000 } = {}) {
+  const mongoUri = process.env.MONGO_URI;
+  if (!mongoUri) {
+    throw new Error('MONGO_URI is not set');
+  }
+
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      await mongoose.connect(mongoUri, {
+        serverSelectionTimeoutMS: 5000,
+        socketTimeoutMS: 45000,
+      });
+      console.log("MongoDB connected successfully");
+      return;
+    } catch (error) {
+      console.error("MongoDB connection error:", error.message);
+
+      if (attempt >= maxRetries) {
+        throw error;
+      }
+
+      console.log(
+        `Retrying connection in ${Math.round(retryDelayMs / 1000)} seconds... (Attempt ${attempt}/${maxRetries})`
+      );
+      await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
     }
   }
 }
